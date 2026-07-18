@@ -1,7 +1,7 @@
 import argparse
 
 import big_boy_rocket_frfr
-import GIGA_ROCKET
+import giga_rocket
 import pointmass_rocket
 import qt_wittle_wocket
 from controller import controller_0, controller_1, controller_function
@@ -11,7 +11,7 @@ METERS_TO_FEET = 3.281
 TYPES = {
     "pointmass": pointmass_rocket.build_and_run_flight,
     "wittle": qt_wittle_wocket.build_and_run_flight,
-    "GIGA": GIGA_ROCKET.build_and_run_flight,
+    "GIGA": giga_rocket.build_and_run_flight,
     "big_boi": big_boy_rocket_frfr.build_and_run_flight,
 }
 
@@ -41,8 +41,8 @@ if target_apogee_agl is None:
         angle=launch_angle,
     )
     print("done")
-    max_apogee = flight0.apogee - env0.elevation
-    min_apogee = flight1.apogee - env1.elevation
+    max_apogee = float(flight0.apogee) - float(env0.elevation)
+    min_apogee = float(flight1.apogee) - float(env1.elevation)
     print(f"Max apogee agl atainable: {max_apogee:.2f} meters")
     print(f"Min apogee agl atainable: {min_apogee:.2f} meters")
     print(f"Delta: {max_apogee - min_apogee:.2f} meters")
@@ -54,7 +54,7 @@ else:
         angle=launch_angle,
     )
     print("done")
-    apogee_agl = flight.apogee - env.elevation
+    apogee_agl = float(flight.apogee) - float(env.elevation)
     apogee_dt_m = abs(target_apogee_agl - apogee_agl)
     apogee_dt_ft = apogee_dt_m * METERS_TO_FEET
     print(f"Target apogee agl: {target_apogee_agl:.2f} meters")

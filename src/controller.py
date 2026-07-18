@@ -1,6 +1,8 @@
 import math
 
+# Controls which airbrake profile is used.
 AIRBRAKE_FILE = "air_brakes_cd.csv"
+
 # How many seconds we have to wait after burnout.
 POST_BURNOUT_TIME = 0.1
 # The vertical velocity at which we start retracting the airbrakes.

@@ -71,36 +71,34 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
     )
     motor = SolidMotor(
         thrust_source="data/motors/cesaroni/Cesaroni_4895L1395-P.eng",
-        burn_time=parameters.get("burn_time")[0],
-        dry_mass=parameters.get("motor_structure_mass")[0],
+        burn_time=parameters["burn_time"],
+        dry_mass=parameters["motor_structure_mass"],
         dry_inertia=(0, 0, 0),
-        center_of_dry_mass_position=parameters.get("grains_center_of_mass_position")[0],
-        grains_center_of_mass_position=parameters.get("grains_center_of_mass_position")[
-            0
-        ],
+        center_of_dry_mass_position=parameters["grains_center_of_mass_position"],
+        grains_center_of_mass_position=parameters["grains_center_of_mass_position"],
         grain_number=5,
-        grain_separation=parameters.get("grain_separation")[0],
-        grain_density=parameters.get("grain_density")[0],
-        grain_outer_radius=parameters.get("grain_outer_radius")[0],
-        grain_initial_inner_radius=parameters.get("grain_initial_inner_radius")[0],
-        grain_initial_height=parameters.get("grain_initial_height")[0],
-        nozzle_radius=parameters.get("nozzle_radius")[0],
-        throat_radius=parameters.get("throat_radius")[0],
+        grain_separation=parameters["grain_separation"],
+        grain_density=parameters["grain_density"],
+        grain_outer_radius=parameters["grain_outer_radius"],
+        grain_initial_inner_radius=parameters["grain_initial_inner_radius"],
+        grain_initial_height=parameters["grain_initial_height"],
+        nozzle_radius=parameters["nozzle_radius"],
+        throat_radius=parameters["throat_radius"],
         interpolation_method="linear",
-        nozzle_position=parameters.get("nozzle_position")[0],
+        nozzle_position=parameters["nozzle_position"],
         coordinate_system_orientation="combustion_chamber_to_nozzle",  # combustion_chamber_to_nozzle"
     )
     ndrt2020 = Rocket(
-        radius=parameters.get("radius")[0],
-        mass=parameters.get("rocket_mass")[0],
+        radius=parameters["radius"],
+        mass=parameters["rocket_mass"],
         inertia=(
-            parameters.get("inertia_i")[0],
-            parameters.get("inertia_i")[0],
-            parameters.get("inertia_z")[0],
+            parameters["inertia_i"],
+            parameters["inertia_i"],
+            parameters["inertia_z"],
         ),
-        power_off_drag=parameters.get("drag_coefficient")[0],
-        power_on_drag=parameters.get("drag_coefficient")[0],
-        center_of_mass_without_motor=parameters.get("center_of_mass_without_motor")[0],
+        power_off_drag=parameters["drag_coefficient"],
+        power_on_drag=parameters["drag_coefficient"],
+        center_of_mass_without_motor=parameters["center_of_mass_without_motor"],
         coordinate_system_orientation="nose_to_tail",
     )
     _air_brakes = ndrt2020.add_air_brakes(
@@ -118,31 +116,31 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         name="Air Brakes",
     )
     ndrt2020.set_rail_buttons(1.5, 2, 45)
-    ndrt2020.add_motor(motor=motor, position=parameters.get("motor_position")[0])
+    ndrt2020.add_motor(motor=motor, position=parameters["motor_position"])
     _nose_cone = ndrt2020.add_nose(
-        length=parameters.get("nose_length")[0],
+        length=parameters["nose_length"],
         kind="tangent",
-        position=parameters.get("nose_position")[0],
+        position=parameters["nose_position"],
     )
     _fin_set = ndrt2020.add_trapezoidal_fins(
         4,
-        span=parameters.get("fin_span")[0],
-        root_chord=parameters.get("fin_root_chord")[0],
-        tip_chord=parameters.get("fin_tip_chord")[0],
-        position=parameters.get("fin_position")[0],
-        sweep_angle=parameters.get("fin_sweep_angle")[0],
-        radius=parameters.get("transition_bottom_radius")[0],
+        span=parameters["fin_span"],
+        root_chord=parameters["fin_root_chord"],
+        tip_chord=parameters["fin_tip_chord"],
+        position=parameters["fin_position"],
+        sweep_angle=parameters["fin_sweep_angle"],
+        radius=parameters["transition_bottom_radius"],
     )
     _transition = ndrt2020.add_tail(
-        top_radius=parameters.get("transition_top_radius")[0],
-        bottom_radius=parameters.get("transition_bottom_radius")[0],
-        length=parameters.get("transition_length")[0],
-        position=parameters.get("transition_position")[0],
+        top_radius=parameters["transition_top_radius"],
+        bottom_radius=parameters["transition_bottom_radius"],
+        length=parameters["transition_length"],
+        position=parameters["transition_position"],
     )
     flight = Flight(
         rocket=ndrt2020,
         environment=env,
-        rail_length=parameters.get("rail_length")[0],
+        rail_length=parameters["rail_length"],
         inclination=angle,
         max_time=100,
         terminate_on_apogee=True,
