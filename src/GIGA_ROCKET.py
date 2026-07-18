@@ -1,16 +1,17 @@
 import datetime
 
-import controller
-from rocketpy import Environment, Flight, Rocket
 from rocketpy.motors import CylindricalTank, Fluid, HybridMotor
 from rocketpy.motors.tank import MassFlowRateBasedTank
+
+import controller
+from rocketpy import Environment, Flight, Rocket
 
 
 def build_and_run_flight(controller_function, target_apogee: float, angle: float):
     flight_date = datetime.date(2024, 8, 24)
     env = Environment(latitude=47.966527, longitude=-81.87413, elevation=1383.4)
     env.set_date((flight_date.year, flight_date.month, flight_date.day, 0))
-    env.set_atmospheric_model(type="custom_atmosphere", wind_v=1.0, wind_u=-2.9)
+    env.set_atmospheric_model(type="custom_atmosphere", wind_v=1, wind_u=-2)
     oxidizer_liq = Fluid(name="N2O_l", density=960)
     oxidizer_gas = Fluid(name="N2O_g", density=1.9277)
     tank_shape = CylindricalTank(0.0665, 1.79)

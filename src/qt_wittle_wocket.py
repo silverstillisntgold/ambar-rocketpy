@@ -1,7 +1,7 @@
 import numpy as np
-from rocketpy import Environment, Flight, Rocket, SolidMotor
 
 import controller
+from rocketpy import Environment, Flight, Rocket, SolidMotor
 
 
 def build_and_run_flight(controller_function, target_apogee: float, angle: float):

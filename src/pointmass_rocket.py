@@ -6,7 +6,7 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
     env = Environment(
         latitude=27.933337901305062, longitude=-80.70898578225906, elevation=6.9
     )
-    env.set_atmospheric_model(type="standard_atmosphere", wind_u=20.0, wind_v=-20.0)
+    env.set_atmospheric_model(type="standard_atmosphere", wind_u=20, wind_v=-20)
     motor = PointMassMotor(
         thrust_source="data/motors/cesaroni/Cesaroni_M1670.eng",
         dry_mass=1.815,
