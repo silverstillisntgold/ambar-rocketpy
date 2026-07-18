@@ -1,7 +1,7 @@
 import argparse
 
 import big_boy_rocket_frfr
-import giga_rocket
+import giga_rocket_bruh
 import pointmass_rocket
 import qt_wittle_wocket
 from controller import controller_0, controller_1, controller_function
@@ -11,7 +11,7 @@ METERS_TO_FEET = 3.281
 TYPES = {
     "pointmass": pointmass_rocket.build_and_run_flight,
     "wittle": qt_wittle_wocket.build_and_run_flight,
-    "GIGA": giga_rocket.build_and_run_flight,
+    "GIGA": giga_rocket_bruh.build_and_run_flight,
     "big_boi": big_boy_rocket_frfr.build_and_run_flight,
 }
 
