@@ -29,7 +29,7 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         gas_mass_flow_rate_out=0,
     )
     hybrid_motor = HybridMotor(
-        thrust_source="data/rockets/defiance/Thrust_curve.csv",
+        thrust_source="../RocketPy/data/rockets/defiance/Thrust_curve.csv",
         dry_mass=13.832,
         dry_inertia=(1.801, 1.801, 0.0305),
         center_of_dry_mass_position=780 / 1000,
@@ -53,8 +53,8 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         # inertia = (180.142, 180.142, 0.262),
         inertia=(94.14, 94.14, 0.09),
         center_of_mass_without_motor=3.29,
-        power_off_drag="data/rockets/defiance/DragCurve.csv",
-        power_on_drag="data/rockets/defiance/DragCurve.csv",
+        power_off_drag="../RocketPy/data/rockets/defiance/DragCurve.csv",
+        power_on_drag="../RocketPy/data/rockets/defiance/DragCurve.csv",
         coordinate_system_orientation="tail_to_nose",
     )
     _air_brakes = defiance.add_air_brakes(

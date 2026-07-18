@@ -8,7 +8,7 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
     )
     env.set_atmospheric_model(type="standard_atmosphere", wind_u=20, wind_v=-20)
     motor = PointMassMotor(
-        thrust_source="data/motors/cesaroni/Cesaroni_M1670.eng",
+        thrust_source="../RocketPy/data/motors/cesaroni/Cesaroni_M1670.eng",
         dry_mass=1.815,
         propellant_initial_mass=2.5,
     )

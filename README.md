@@ -1,7 +1,13 @@
 # ambar-rocketpy
 
-Requires the latest dev build of [`RocketPy`] (included as a sub-repo). The current release build contains a bug
+A repo for experimenting with vertical rocket state estimation and active airbrake control.
+
+## Usage
+
+Requires the latest dev build of [`RocketPy`] (included as a submodule). The current release build contains a bug
 in the controller backend which causes finite differentation of timestamps (used to find acceleration) to fail.
+
+Even if you already have the latest dev build installed, the submodule is required for the rocket example data it provides.
 
 To ensure you're using the latest dev build, clone this repo recursively, then navigate to the local [`RocketPy`] repo and run:
 

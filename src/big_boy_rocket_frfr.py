@@ -6,9 +6,9 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
     env = Environment(
         latitude=27.933337901305062, longitude=-80.70898578225906, elevation=6.9
     )
-    env.set_atmospheric_model(type="standard_atmosphere", wind_u=20.0, wind_v=-20.0)
+    env.set_atmospheric_model(type="standard_atmosphere", wind_u=20, wind_v=-20)
     Pro75M1670 = SolidMotor(
-        thrust_source="data/motors/cesaroni/Cesaroni_M1670.eng",
+        thrust_source="../RocketPy/data/motors/cesaroni/Cesaroni_M1670.eng",
         dry_mass=1.815,
         dry_inertia=(0.125, 0.125, 0.002),
         nozzle_radius=33 / 1000,
@@ -29,8 +29,8 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         radius=127 / 2000,
         mass=14.426,
         inertia=(6.321, 6.321, 0.034),
-        power_off_drag="data/rockets/calisto/powerOffDragCurve.csv",
-        power_on_drag="data/rockets/calisto/powerOnDragCurve.csv",
+        power_off_drag="../RocketPy/data/rockets/calisto/powerOffDragCurve.csv",
+        power_on_drag="../RocketPy/data/rockets/calisto/powerOnDragCurve.csv",
         center_of_mass_without_motor=0,
         coordinate_system_orientation="tail_to_nose",
     )
@@ -62,7 +62,7 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         span=0.110,
         position=-1.04956,
         cant_angle=0.5,
-        airfoil=("data/airfoils/NACA0012-radians.txt", "radians"),
+        airfoil=("../RocketPy/data/airfoils/NACA0012-radians.txt", "radians"),
     )
     _tail = calisto.add_tail(
         top_radius=0.0635, bottom_radius=0.0435, length=0.060, position=-1.194656

@@ -3,10 +3,10 @@ import math
 # Controls which airbrake profile is used.
 AIRBRAKE_FILE = "air_brakes_cd.csv"
 
-# How many seconds we have to wait after burnout.
+# How many seconds we wait after burnout.
 POST_BURNOUT_TIME = 0.1
 # The vertical velocity at which we start retracting the airbrakes.
-VELOCITY_CUTOFF = 1.0
+VELOCITY_CUTOFF = 5.0
 # Polling rate.
 SAMPLING_RATE = 100.0
 # Max change in % deployment per second.
@@ -70,7 +70,7 @@ def controller_function(
     environment,  # For elevation
 ):
     """
-    Controller which in theory is generic across airbrakes/rockets.
+    Controller which is generic across airbrakes/rockets.
     Assumes clamp=True.
     """
     # We are using exact data from simulation, but good approximations
@@ -78,7 +78,7 @@ def controller_function(
     # Me when the approximations aren't good enough *fucking dies*.
     vertical_velocity = state[5]
     altitude_agl = state[2] - environment.elevation
-    # Janky approach but such is life with python.
+    # Janky approach but such is life in python.
     motor_burn_out_time = observed_variables[0][0]
     target_apogee_agl = observed_variables[0][1]
 
