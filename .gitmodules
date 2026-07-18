@@ -1,0 +1,4 @@
+[submodule "RocketPy"]
+	path = RocketPy
+	url = https://github.com/RocketPy-Team/RocketPy.git
+	branch = master
