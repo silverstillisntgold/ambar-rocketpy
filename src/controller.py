@@ -1,5 +1,7 @@
 import math
 
+from vertical_estimator import VerticalEstimator
+
 # Controls which airbrake profile is used.
 AIRBRAKE_FILE = "air_brakes_cd.csv"
 
@@ -60,24 +62,31 @@ def controller_1(
 
 
 def controller_function(
-    time,  # Timekeeping (who would've guessed)
-    sampling_rate,  # Not used
-    state,  # For current state
-    state_history,  # Not used
-    observed_variables,  # For storing previous state
-    air_brakes,  # For controlling deployment
-    sensors,  # Not used
-    environment,  # For elevation
+    time,
+    sampling_rate,
+    state,
+    state_history,
+    observed_variables,
+    air_brakes,
+    sensors,
+    environment,
 ):
     """
     Controller which is generic across airbrakes/rockets.
     Assumes clamp=True.
     """
-    # We are using exact data from simulation, but good approximations
-    # from high-quality filters should be a good enough substitute.
-    # Me when the approximations aren't good enough *fucking dies*.
-    vertical_velocity = state[5]
-    altitude_agl = state[2] - environment.elevation
+    if not hasattr(air_brakes, "_vertical_estimator"):
+        air_brakes._vertical_estimator = VerticalEstimator(
+            pressure_baseline=float(environment.pressure(environment.elevation)),
+            baseline_temperature_k=float(
+                environment.temperature(environment.elevation)
+            ),
+        )
+
+    estimate = air_brakes._vertical_estimator.update(time, sensors)
+    vertical_velocity = estimate.vertical_velocity
+    altitude_agl = estimate.altitude_agl
+    vertical_acceleration = estimate.vertical_acceleration
     # Janky approach but such is life in python.
     motor_burn_out_time = observed_variables[0][0]
     target_apogee_agl = observed_variables[0][1]
@@ -88,16 +97,6 @@ def controller_function(
     ):
         air_brakes.deployment_level -= MAX_CHANGE
         return (0.0, time, vertical_velocity)
-
-    # DON'T USE 'state_history' IT'S FUCKED!!
-    _discard, prev_time, prev_vertical_velocity = observed_variables[-1]
-    # We have to compute this because for some fucking reason RocketPy
-    # doesn't just give it to us directly? Dickheads.
-    dv = vertical_velocity - prev_vertical_velocity
-    dt = time - prev_time  # Never zero (anymore...)
-    if dt < 1e-7:
-        raise Exception("dt is 0.0 again fuck me")
-    vertical_acceleration = dv / dt
 
     # """"1D"""" equation of motion for a coasting rocket :)
     vert_velo_2 = vertical_velocity * vertical_velocity

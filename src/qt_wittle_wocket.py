@@ -4,7 +4,14 @@ import controller
 from rocketpy import Environment, Flight, Rocket, SolidMotor
 
 
-def build_and_run_flight(controller_function, target_apogee: float, angle: float):
+def build_and_run_flight(
+    controller_function,
+    target_apogee: float,
+    angle: float,
+    accel,
+    gyro,
+    baro,
+):
     parameters = {
         # Mass Details
         "rocket_mass": (18.998, 0.010),  # Rocket dry mass: 20.846 kg
@@ -101,6 +108,12 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         center_of_mass_without_motor=parameters["center_of_mass_without_motor"][0],
         coordinate_system_orientation="nose_to_tail",
     )
+
+    avionics_position = parameters["center_of_mass_without_motor"][0]
+    ndrt2020.add_sensor(accel, position=avionics_position)
+    ndrt2020.add_sensor(gyro, position=avionics_position)
+    ndrt2020.add_sensor(baro, position=avionics_position)
+
     _air_brakes = ndrt2020.add_air_brakes(
         drag_coefficient_curve=controller.AIRBRAKE_FILE,
         controller_function=controller_function,

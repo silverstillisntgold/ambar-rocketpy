@@ -7,7 +7,14 @@ import controller
 from rocketpy import Environment, Flight, Rocket
 
 
-def build_and_run_flight(controller_function, target_apogee: float, angle: float):
+def build_and_run_flight(
+    controller_function,
+    target_apogee: float,
+    angle: float,
+    accel,
+    gyro,
+    baro,
+):
     flight_date = datetime.date(2024, 8, 24)
     env = Environment(latitude=47.966527, longitude=-81.87413, elevation=1383.4)
     env.set_date((flight_date.year, flight_date.month, flight_date.day, 0))
@@ -57,6 +64,12 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         power_on_drag="../RocketPy/data/rockets/defiance/DragCurve.csv",
         coordinate_system_orientation="tail_to_nose",
     )
+
+    avionics_position = defiance.center_of_mass_without_motor
+    defiance.add_sensor(accel, position=avionics_position)
+    defiance.add_sensor(gyro, position=avionics_position)
+    defiance.add_sensor(baro, position=avionics_position)
+
     _air_brakes = defiance.add_air_brakes(
         drag_coefficient_curve=controller.AIRBRAKE_FILE,
         controller_function=controller_function,

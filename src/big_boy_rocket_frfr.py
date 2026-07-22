@@ -2,7 +2,14 @@ import controller
 from rocketpy import Environment, Flight, Rocket, SolidMotor
 
 
-def build_and_run_flight(controller_function, target_apogee: float, angle: float):
+def build_and_run_flight(
+    controller_function,
+    target_apogee: float,
+    angle: float,
+    accel,
+    gyro,
+    baro,
+):
     env = Environment(
         latitude=27.933337901305062, longitude=-80.70898578225906, elevation=6.9
     )
@@ -34,6 +41,12 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         center_of_mass_without_motor=0,
         coordinate_system_orientation="tail_to_nose",
     )
+
+    avionics_position = calisto.center_of_mass_without_motor
+    calisto.add_sensor(accel, position=avionics_position)
+    calisto.add_sensor(gyro, position=avionics_position)
+    calisto.add_sensor(baro, position=avionics_position)
+
     _air_brakes = calisto.add_air_brakes(
         drag_coefficient_curve=controller.AIRBRAKE_FILE,
         controller_function=controller_function,

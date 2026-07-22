@@ -2,7 +2,14 @@ import controller
 from rocketpy import Environment, Flight, PointMassMotor, PointMassRocket
 
 
-def build_and_run_flight(controller_function, target_apogee: float, angle: float):
+def build_and_run_flight(
+    controller_function,
+    target_apogee: float,
+    angle: float,
+    accel,
+    gyro,
+    baro,
+):
     env = Environment(
         latitude=27.933337901305062, longitude=-80.70898578225906, elevation=6.9
     )
@@ -19,6 +26,12 @@ def build_and_run_flight(controller_function, target_apogee: float, angle: float
         power_off_drag=0.5,  # Constant drag coefficient
         power_on_drag=0.5,
     )
+
+    avionics_position = rocket.center_of_mass_without_motor
+    rocket.add_sensor(accel, position=avionics_position)
+    rocket.add_sensor(gyro, position=avionics_position)
+    rocket.add_sensor(baro, position=avionics_position)
+
     _air_brakes = rocket.add_air_brakes(
         drag_coefficient_curve=controller.AIRBRAKE_FILE,
         controller_function=controller_function,
