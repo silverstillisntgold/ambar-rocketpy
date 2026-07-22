@@ -4,16 +4,16 @@ A repo for experimenting with vertical rocket state estimation and active airbra
 
 ## Usage
 
-Requires the latest dev build of [`RocketPy`] (included as a submodule). The current release build contains a bug
-in the controller backend which causes finite differentation of timestamps (used to find acceleration) to fail.
+Requires at least [`RocketPy`] v1.13.0 (included as a submodule). Older releases contained a bug
+in the controller which was tremendously cringe to identify and work around.
 
-Even if you already have the latest dev build installed, the submodule is required for the rocket example data it provides.
+The submodule is required for the rocket example data it provides.
 
-To ensure you're using the latest dev build, clone this repo recursively, then navigate to the local [`RocketPy`] repo and run:
+You can ensure you have the latest [`RocketPy`] by running:
 
 ```bash
 py -m pip uninstall rocketpy
-py -m pip install ".[all]"
+py -m pip install rocketpy
 ```
 
 Ensure you're using the python install manager and have the latest python3 version installed.
