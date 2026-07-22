@@ -125,5 +125,9 @@ else:
     print(f"Apogee delta: {apogee_dt_m:.2f} meters")
     print(f"Apogee delta: {apogee_dt_ft:.2f} feet (should be <=100.00 feet)")
     if show_trajectory:
-        flight.plots.trajectory_3d()
-        flight.info()
+        # flight.plots.trajectory_3d()
+        # flight.info()
+        flight.plots.animate_trajectory(
+            show_attitude_plots=True,
+            export_file="flight_animation.mp4",
+        )
