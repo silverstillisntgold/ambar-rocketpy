@@ -25,13 +25,13 @@ def build_and_run_flight(
     oxidizer_tank = MassFlowRateBasedTank(
         name="oxidizer_tank",
         geometry=tank_shape,
-        flux_time=(6.5),
+        flux_time=6.5,
         liquid=oxidizer_liq,
         gas=oxidizer_gas,
         initial_liquid_mass=17,
         initial_gas_mass=0,
         liquid_mass_flow_rate_in=0,
-        liquid_mass_flow_rate_out=(17 - 1e-7) / 6.5,
+        liquid_mass_flow_rate_out=(17.0 - 1e-7) / 6.5,
         gas_mass_flow_rate_in=0,
         gas_mass_flow_rate_out=0,
     )

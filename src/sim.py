@@ -22,6 +22,12 @@ warnings.filterwarnings(
     category=UserWarning,
     module=r"rocketpy\.sensors\.sensor",
 )
+warnings.filterwarnings(
+    "ignore",
+    message=r"invalid value encountered in divide",
+    category=RuntimeWarning,
+    module=r"rocketpy\.mathutils\._calc\.(polation_1d|_fitting)",
+)
 
 DEFAULT_ANGLE_FROM_HORIZONAL = 85.0
 METERS_TO_FEET = 3.281
