@@ -22,7 +22,7 @@ Ensure you're using the python install manager and have the latest python3 versi
 
 Navigate to the `src` directory and run `py sim.py --help`. There are currently four rocket options, and
 they will all be listed there. Running the simulation with no specified apogee is the recommended first step,
-as that will show you the min/max atainable apogee with/without full airbrake deployment after burnout.
+as that will show you the min/max attainable apogee with/without full airbrake deployment after burnout.
 
 From there you can test different apogee settings. The `--traj` setting writes an animation of the flight to
 "flight_animation.mp4" in the root directory. The `--angle` settings lets you specifiy a launch angle from horizontal.
