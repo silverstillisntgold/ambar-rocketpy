@@ -36,7 +36,6 @@ def controller_0(
     Assumes clamp=True.
     """
     air_brakes.deployment_level -= MAX_CHANGE
-    return None
 
 
 def controller_1(
@@ -58,7 +57,6 @@ def controller_1(
         air_brakes.deployment_level -= MAX_CHANGE
     else:
         air_brakes.deployment_level += MAX_CHANGE
-    return None
 
 
 def controller_function(

@@ -129,5 +129,5 @@ else:
         # flight.info()
         flight.plots.animate_trajectory(
             show_attitude_plots=True,
-            export_file="flight_animation.mp4",
+            export_file="../flight_animation.mp4",
         )
