@@ -1,6 +1,6 @@
 # ambar-rocketpy
 
-A repo for experimenting with vertical rocket state estimation and active airbrake control.
+A repo for experimenting with active airbrake control.
 
 ## RocketPy
 
@@ -24,7 +24,12 @@ Navigate to the `src` directory and run `py sim.py --help`. There are currently 
 they will all be listed there. Running the simulation with no specified apogee is the recommended first step,
 as that will show you the min/max attainable apogee with/without full airbrake deployment after burnout.
 
-From there you can test different apogee settings. The `--traj` setting writes an animation of the flight to
+Those two values define the apogee window, and any height between them is a reasonable target.
+
+From there you can test different apogee settings. The `--traj` argument writes an animation of the flight to
 "flight_animation.mp4" in the root directory. The `--angle` settings lets you specifiy a launch angle from horizontal.
+
+Python 3.15 can't be used when passing `--traj`, as the required pyvista backend used to generate the animation has
+a dependency chain that doesn't support the latest Python version.
 
 [`RocketPy`]: https://github.com/RocketPy-Team/RocketPy
